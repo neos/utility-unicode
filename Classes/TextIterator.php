@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\Flow\Utility\Unicode;
+namespace Neos\Utility\Unicode;
 
 /*
  * This file is part of the Neos.Utility.Unicode package.
@@ -11,7 +11,7 @@ namespace TYPO3\Flow\Utility\Unicode;
  * source code.
  */
 
-use TYPO3\Flow\Utility\Unicode;
+use Neos\Utility\Unicode;
 
 /**
  * A UTF8-aware TextIterator

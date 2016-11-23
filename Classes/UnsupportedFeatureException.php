@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\Flow\Utility\Unicode;
+namespace Neos\Utility\Unicode;
 
 /*
  * This file is part of the Neos.Utility.Unicode package.
@@ -12,9 +12,10 @@ namespace TYPO3\Flow\Utility\Unicode;
  */
 
 /**
- * Exception thrown by the Unicode methods.
+ * Exception thrown if a feature is not supported.
+ *
+ * @api
  */
-class Exception extends \Exception
+class UnsupportedFeatureException extends \Exception
 {
-
 }

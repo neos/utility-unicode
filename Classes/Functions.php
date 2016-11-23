@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\Flow\Utility\Unicode;
+namespace Neos\Utility\Unicode;
 
 /*
  * This file is part of the Neos.Utility.Unicode package.
