@@ -31,7 +31,7 @@ abstract class Functions
     {
         $result = '';
         $splitIntoLowerCaseWords = preg_split("/([\n\r\t ])/", self::strtolower($string), -1, PREG_SPLIT_DELIM_CAPTURE);
-        foreach ($splitIntoLowerCaseWords  ?: [] as $delimiterOrValue) {
+        foreach ($splitIntoLowerCaseWords ?: [] as $delimiterOrValue) {
             $result .= self::strtoupper(self::substr($delimiterOrValue, 0, 1)) . self::substr($delimiterOrValue, 1);
         }
         return $result;
