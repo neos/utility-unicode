@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Neos\Utility\Unicode\Tests\Unit;
 
 /*
@@ -16,7 +19,7 @@ use Neos\Utility\Unicode\Functions;
 /**
  * Testcase for the PHP6 Functions backport
  */
-class FunctionsTest extends \PHPUnit\Framework\TestCase
+final class FunctionsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Checks if strtotitle() at least works with latin characters.
@@ -26,7 +29,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     public function strtotitleWorksWithLatinCharacters()
     {
         $testString = 'this Is - my TestString.';
-        self::assertEquals('This Is - My Teststring.', Functions::strtotitle($testString), 'strtotitle() did not return the expected string.');
+        self::assertSame('This Is - My Teststring.', Functions::strtotitle($testString), 'strtotitle() did not return the expected string.');
     }
 
     /**
@@ -38,7 +41,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $testString = ' öl Ist nicht das GLEICHE wie øl.';
         $expectedString = ' Öl Ist Nicht Das Gleiche Wie Øl.';
-        self::assertEquals($expectedString, Functions::strtotitle($testString), 'strtotitle() did not return the expected string for the unicode test.');
+        self::assertSame($expectedString, Functions::strtotitle($testString), 'strtotitle() did not return the expected string for the unicode test.');
     }
 
     /**
@@ -82,7 +85,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     public function strtoupperWorksWithLatinCharacters()
     {
         $testString = 'typo3';
-        self::assertEquals('TYPO3', Functions::strtoupper($testString), 'strtoupper() with latin characters didn\'t work out.');
+        self::assertSame('TYPO3', Functions::strtoupper($testString), 'strtoupper() with latin characters didn\'t work out.');
     }
 
     /**
@@ -95,7 +98,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
         $testString = 'Here are some characters: äöüÄÖÜßéèêåÅøØæÆœŒ ...';
         $expectedResult = 'HERE ARE SOME CHARACTERS: ÄÖÜÄÖÜSSÉÈÊÅÅØØÆÆŒŒ ...';
         $result = Functions::strtoupper($testString);
-        self::assertEquals($expectedResult, $result, 'strtoupper() could not convert our selection of special characters.');
+        self::assertSame($expectedResult, $result, 'strtoupper() could not convert our selection of special characters.');
     }
 
     /**
@@ -106,7 +109,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     public function strtolowerWorksWithLatinCharacters()
     {
         $testString = 'TYPO3';
-        self::assertEquals('typo3', Functions::strtolower($testString), 'strtolower() with latin characters didn\'t work out.');
+        self::assertSame('typo3', Functions::strtolower($testString), 'strtolower() with latin characters didn\'t work out.');
     }
 
     /**
@@ -119,7 +122,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
         $testString = 'HERE ARE SOME CHARACTERS: ÄÖÜÄÖÜßÉÈÊÅÅØØÆÆŒŒ ...';
         $expectedResult = 'here are some characters: äöüäöüßéèêååøøææœœ ...';
         $result = Functions::strtolower($testString);
-        self::assertEquals($expectedResult, $result, 'strtolower() could not convert our selection of special characters.');
+        self::assertSame($expectedResult, $result, 'strtolower() could not convert our selection of special characters.');
     }
 
     /**
@@ -130,7 +133,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     public function strlenWorksWithLatinCharacters()
     {
         $testString = 'Feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
-        self::assertEquals(56, Functions::strlen($testString), 'strlen() did not return the correct string length for latin character string.');
+        self::assertSame(56, Functions::strlen($testString), 'strlen() did not return the correct string length for latin character string.');
     }
 
     /**
@@ -141,7 +144,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     public function strlenWorksWithCertainSpecialChars()
     {
         $testString = 'here are some characters: äöüäöüßéèêååøøææœœ“” ...';
-        self::assertEquals(50, Functions::strlen($testString), 'strlen() did not return the correct string length for unicode string.');
+        self::assertSame(50, Functions::strlen($testString), 'strlen() did not return the correct string length for unicode string.');
     }
 
     /**
@@ -153,7 +156,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $testString = 'feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
         $expectedResult = 'Feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
-        self::assertEquals($expectedResult, Functions::ucfirst($testString), 'ucfirst() did not return the correct string for latin string.');
+        self::assertSame($expectedResult, Functions::ucfirst($testString), 'ucfirst() did not return the correct string for latin string.');
     }
 
     /**
@@ -165,11 +168,11 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $testString = 'äeugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
         $expectedResult = 'Äeugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
-        self::assertEquals($expectedResult, Functions::ucfirst($testString), 'ucfirst() did not return the correct string for a umlaut.');
+        self::assertSame($expectedResult, Functions::ucfirst($testString), 'ucfirst() did not return the correct string for a umlaut.');
 
         $testString = 'åeugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
         $expectedResult = 'Åeugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
-        self::assertEquals($expectedResult, Functions::ucfirst($testString), 'ucfirst() did not return the correct string for danish a.');
+        self::assertSame($expectedResult, Functions::ucfirst($testString), 'ucfirst() did not return the correct string for danish a.');
     }
 
     /**
@@ -181,7 +184,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $testString = 'FEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
         $expectedResult = 'fEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
-        self::assertEquals($expectedResult, Functions::lcfirst($testString), 'lcfirst() did not return the correct string for latin string.');
+        self::assertSame($expectedResult, Functions::lcfirst($testString), 'lcfirst() did not return the correct string for latin string.');
     }
 
     /**
@@ -193,11 +196,11 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $testString = 'ÄEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
         $expectedResult = 'äEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
-        self::assertEquals($expectedResult, Functions::lcfirst($testString), 'lcfirst() did not return the correct string for a umlaut.');
+        self::assertSame($expectedResult, Functions::lcfirst($testString), 'lcfirst() did not return the correct string for a umlaut.');
 
         $testString = 'ÅEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
         $expectedResult = 'åEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
-        self::assertEquals($expectedResult, Functions::lcfirst($testString), 'lcfirst() did not return the correct string for danish a.');
+        self::assertSame($expectedResult, Functions::lcfirst($testString), 'lcfirst() did not return the correct string for danish a.');
     }
 
     /**
@@ -208,7 +211,7 @@ class FunctionsTest extends \PHPUnit\Framework\TestCase
     public function strposWorksWithLatinCharacters()
     {
         $testString = 'Feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
-        self::assertEquals(8, strpos($testString, 'tincidunt'), 'strpos() did not return the correct position for a latin character string.');
+        self::assertSame(8, strpos($testString, 'tincidunt'), 'strpos() did not return the correct position for a latin character string.');
     }
 
     /**
