@@ -13,19 +13,19 @@ namespace Neos\Utility\Unicode\Tests\Unit;
  * information, please view the LICENSE file which was distributed with this
  * source code.
  */
-
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Neos\Utility\Unicode\Functions;
 
 /**
  * Testcase for the PHP6 Functions backport
  */
-final class FunctionsTest extends \PHPUnit\Framework\TestCase
+final class FunctionsTest extends TestCase
 {
     /**
      * Checks if strtotitle() at least works with latin characters.
-     *
-     * @test
      */
+    #[Test]
     public function strtotitleWorksWithLatinCharacters()
     {
         $testString = 'this Is - my TestString.';
@@ -34,9 +34,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if strtotitle() works with unicode strings
-     *
-     * @test
      */
+    #[Test]
     public function strtotitleWorksWithUnicodeStrings()
     {
         $testString = ' öl Ist nicht das GLEICHE wie øl.';
@@ -46,9 +45,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if substr() basically works with latin characters.
-     *
-     * @test
      */
+    #[Test]
     public function substrWorksWithLatinCharacters()
     {
         $testString = 'I say "hello world".';
@@ -57,9 +55,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if substr() can handle UTF8 strings
-     *
-     * @test
      */
+    #[Test]
     public function substrWorksWithUTF8Characters()
     {
         $testString = 'Kasper Skårhøj implemented most versions of TYPO3.';
@@ -68,9 +65,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if substr() can handle UTF8 strings, specifying no length
-     *
-     * @test
      */
+    #[Test]
     public function substrWorksWithUTF8CharactersSpecifyingNoLength()
     {
         $testString = 'Kasper Skårhøj implemented most versions of TYPO3.';
@@ -79,9 +75,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of \Neos\Utility\Unicode\Functions::strtoupper basically works
-     *
-     * @test
      */
+    #[Test]
     public function strtoupperWorksWithLatinCharacters()
     {
         $testString = 'typo3';
@@ -90,9 +85,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of \Neos\Utility\Unicode\Functions::strtoupper can at least handle some common special chars
-     *
-     * @test
      */
+    #[Test]
     public function strtoupperWorksWithCertainSpecialChars()
     {
         $testString = 'Here are some characters: äöüÄÖÜßéèêåÅøØæÆœŒ ...';
@@ -103,9 +97,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of strtolower basically works
-     *
-     * @test
      */
+    #[Test]
     public function strtolowerWorksWithLatinCharacters()
     {
         $testString = 'TYPO3';
@@ -114,9 +107,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of strtolower can at least handle some common special chars
-     *
-     * @test
      */
+    #[Test]
     public function strtolowerWorksWithCertainSpecialChars()
     {
         $testString = 'HERE ARE SOME CHARACTERS: ÄÖÜÄÖÜßÉÈÊÅÅØØÆÆŒŒ ...';
@@ -127,9 +119,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of strlen can handle some regular latin characters.
-     *
-     * @test
      */
+    #[Test]
     public function strlenWorksWithLatinCharacters()
     {
         $testString = 'Feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
@@ -138,9 +129,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of strlen can handle some common special chars
-     *
-     * @test
      */
+    #[Test]
     public function strlenWorksWithCertainSpecialChars()
     {
         $testString = 'here are some characters: äöüäöüßéèêååøøææœœ“” ...';
@@ -149,9 +139,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of ucfirst can handle some regular latin characters.
-     *
-     * @test
      */
+    #[Test]
     public function ucfirstWorksWithLatinCharacters()
     {
         $testString = 'feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
@@ -161,9 +150,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of ucfirst can handle some common special chars.
-     *
-     * @test
      */
+    #[Test]
     public function ucfirstWorksWithCertainSpecialChars()
     {
         $testString = 'äeugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
@@ -177,9 +165,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of lcfirst can handle some regular latin characters.
-     *
-     * @test
      */
+    #[Test]
     public function lcfirstWorksWithLatinCharacters()
     {
         $testString = 'FEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
@@ -189,9 +176,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of lcfirst can handle some common special chars.
-     *
-     * @test
      */
+    #[Test]
     public function lcfirstWorksWithCertainSpecialChars()
     {
         $testString = 'ÄEUGIAT TINCIDUNT DUO ID, 23 QUAM DELENIT VOCIBUS NAM EU';
@@ -205,9 +191,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of strpos can handle some regular latin characters.
-     *
-     * @test
      */
+    #[Test]
     public function strposWorksWithLatinCharacters()
     {
         $testString = 'Feugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
@@ -216,18 +201,15 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of strpos can handle some common special characters
-     *
-     * @test
      */
+    #[Test]
     public function strposWorksWithCertainSpecialChars()
     {
         $testString = 'Åeugiat tincidunt duo id, 23 quam delenit vocibus nam eu';
         self::assertEquals(8, Functions::strpos($testString, 'tincidunt'), 'strpos() did not return the correct positions for a unicode string.');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parse_urlWorksWithUTF8Chars()
     {
         $url = 'http://www.mysite.org/he/פרויקטים/ByYear.html';
@@ -239,9 +221,7 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expected, Functions::parse_url($url), 'parse_url() did not return the correct result for a unicode URL.');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parse_urlWorksWithIPv6()
     {
         $url = 'http://[3b00:f59:1008::212:183:20]';
@@ -252,9 +232,7 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expected, Functions::parse_url($url), 'parse_url() did not return the correct result for a unicode URL.');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parse_urlWorksWithIPv6AndUTF8Chars()
     {
         $url = 'http://[3b00:f59:1008::212:183:20]:443/he/פרויקטים/ByYear.html';
@@ -269,9 +247,8 @@ final class FunctionsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if our version of pathinfo can handle some common special characters
-     *
-     * @test
      */
+    #[Test]
     public function pathinfoWorksWithCertainSpecialChars()
     {
         $testString = 'кириллическийПуть/кириллическоеИмя.расширение';
