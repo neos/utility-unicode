@@ -1,4 +1,5 @@
 <?php
+
 namespace Neos\Utility\Unicode\Tests\Unit;
 
 /*
@@ -11,8 +12,8 @@ namespace Neos\Utility\Unicode\Tests\Unit;
  * source code.
  */
 
-use Neos\Utility\Unicode\TextIterator;
 use Neos\Utility\Unicode;
+use Neos\Utility\Unicode\TextIterator;
 
 /**
  * Testcase for the TextIterator port

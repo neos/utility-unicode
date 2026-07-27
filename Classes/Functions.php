@@ -1,4 +1,5 @@
 <?php
+
 namespace Neos\Utility\Unicode;
 
 /*
@@ -209,7 +210,7 @@ abstract class Functions
             $components['host'] = $componentsFromUrl['host'];
         }
         if (array_key_exists('port', $componentsFromUrl)) {
-            $components['port'] = (integer)$componentsFromUrl['port'];
+            $components['port'] = (int)$componentsFromUrl['port'];
         } else {
             unset($components['port']);
         }
