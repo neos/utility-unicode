@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Neos\Utility\Unicode\Tests\Unit;
 
 /*
@@ -10,20 +13,21 @@ namespace Neos\Utility\Unicode\Tests\Unit;
  * information, please view the LICENSE file which was distributed with this
  * source code.
  */
-
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Neos\Utility\Unicode\Exception;
 use Neos\Utility\Unicode\TextIterator;
 use Neos\Utility\Unicode;
 
 /**
  * Testcase for the TextIterator port
  */
-class TextIteratorTest extends \PHPUnit\Framework\TestCase
+final class TextIteratorTest extends TestCase
 {
     /**
      * Checks if a new instance with the default iterator type can be created
-     *
-     * @test
      */
+    #[Test]
     public function canCreateIteratorOfDefaultType()
     {
         $iterator = new TextIterator('Some string');
@@ -32,9 +36,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if a new instance iterating over characters can be created
-     *
-     * @test
      */
+    #[Test]
     public function instantiatingCharacterIteratorWorks()
     {
         $characterIterator = new TextIterator('Some string', TextIterator::CHARACTER);
@@ -43,9 +46,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if a new instance iterating over words can be created
-     *
-     * @test
      */
+    #[Test]
     public function instantiatingWordIteratorWorks()
     {
         $wordIterator = new TextIterator('Some string', TextIterator::WORD);
@@ -55,9 +57,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if a new instance iterating over sentences can be created
-     *
-     * @test
      */
+    #[Test]
     public function instantiatingSentenceIteratorWorks()
     {
         $sentenceIterator = new TextIterator('Some string', TextIterator::SENTENCE);
@@ -66,9 +67,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if a new instance iterating over lines can be created
-     *
-     * @test
      */
+    #[Test]
     public function instantiatingLineIteratorWorks()
     {
         $lineIterator = new TextIterator('Some string', TextIterator::LINE);
@@ -78,24 +78,22 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if the constructor rejects an invalid iterator type
-     *
-     * @test
      */
+    #[Test]
     public function instantiatingIteratorWithInvalidTypeThrowsError()
     {
         try {
             new TextIterator('Some string', 948);
             $this->fail('Constructor did not reject invalid TextIterator type.');
-        } catch (Unicode\Exception $exception) {
+        } catch (Exception $exception) {
             self::assertStringContainsString('Invalid iterator type in TextIterator constructor', $exception->getMessage(), 'Wrong error message.');
         }
     }
 
     /**
      * Checks if character iteration basically works
-     *
-     * @test
      */
+    #[Test]
     public function characterIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by character...', TextIterator::CHARACTER);
@@ -104,14 +102,13 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
         foreach ($iterator as $currentCharacter) {
             $result .= $currentCharacter;
         }
-        self::assertEquals('This is a test string. Let\'s iterate it by character...', $result, 'Character iteration didn\'t return the right values.');
+        self::assertSame('This is a test string. Let\'s iterate it by character...', $result, 'Character iteration didn\'t return the right values.');
     }
 
     /**
      * Checks if word iteration basically works
-     *
-     * @test
      */
+    #[Test]
     public function wordIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word...', TextIterator::WORD);
@@ -120,14 +117,13 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
         foreach ($iterator as $currentWord) {
             $result .= $currentWord;
         }
-        self::assertEquals('This is a test string. Let\'s iterate it by word...', $result, 'Word iteration didn\'t return the right values.');
+        self::assertSame('This is a test string. Let\'s iterate it by word...', $result, 'Word iteration didn\'t return the right values.');
     }
 
     /**
      * Checks if sentence iteration basically works
-     *
-     * @test
      */
+    #[Test]
     public function sentenceIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by sentence...', TextIterator::SENTENCE);
@@ -136,14 +132,13 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
         foreach ($iterator as $currentSentence) {
             $result .= $currentSentence;
         }
-        self::assertEquals('This is a test string. Let\'s iterate it by sentence...', $result, 'Sentence iteration didn\'t return the right values.');
+        self::assertSame('This is a test string. Let\'s iterate it by sentence...', $result, 'Sentence iteration didn\'t return the right values.');
     }
 
     /**
      * Checks if line iteration basically works
-     *
-     * @test
      */
+    #[Test]
     public function lineIterationBasicallyWorks()
     {
         $iterator = new TextIterator("This is a test string. \nLet's iterate \nit by line...", TextIterator::LINE);
@@ -152,14 +147,13 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
         foreach ($iterator as $currentLine) {
             $result .= $currentLine;
         }
-        self::assertEquals("This is a test string. \nLet's iterate \nit by line...", $result, 'Line iteration didn\'t return the right values.');
+        self::assertSame("This is a test string. \nLet's iterate \nit by line...", $result, 'Line iteration didn\'t return the right values.');
     }
 
     /**
      * Checks if the offset method basically works with character iteration
-     *
-     * @test
      */
+    #[Test]
     public function offsetInCharacterIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by character...', TextIterator::CHARACTER);
@@ -168,14 +162,13 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
                 break;
             }
         }
-        self::assertEquals($iterator->offset(), 23, 'Wrong offset returned in character iteration.');
+        self::assertSame(23, $iterator->offset(), 'Wrong offset returned in character iteration.');
     }
 
     /**
      * Checks if the offset method basically works with word iteration
-     *
-     * @test
      */
+    #[Test]
     public function offsetInWordIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word...', TextIterator::WORD);
@@ -184,14 +177,13 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
                 break;
             }
         }
-        self::assertEquals($iterator->offset(), 29, 'Wrong offset returned in word iteration.');
+        self::assertSame(29, $iterator->offset(), 'Wrong offset returned in word iteration.');
     }
 
     /**
      * Checks if the offset method basically works with sentence iteration
-     *
-     * @test
      */
+    #[Test]
     public function offsetInSentenceIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word...', TextIterator::SENTENCE);
@@ -200,38 +192,35 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
                 break;
             }
         }
-        self::assertEquals($iterator->offset(), 23, 'Wrong offset returned in sentence iteration.');
+        self::assertSame(23, $iterator->offset(), 'Wrong offset returned in sentence iteration.');
     }
 
     /**
      * Checks if the "first" method basically works
-     *
-     * @test
      */
+    #[Test]
     public function firstBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word...', TextIterator::WORD);
         $iterator->next();
-        self::assertEquals($iterator->first(), 'This', 'Wrong element returned by first().');
+        self::assertSame('This', $iterator->first(), 'Wrong element returned by first().');
     }
 
     /**
      * Checks if the "last" method basically works
-     *
-     * @test
      */
+    #[Test]
     public function lastBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word', TextIterator::WORD);
         $iterator->rewind();
-        self::assertEquals($iterator->last(), 'word', 'Wrong element returned by last().');
+        self::assertSame('word', $iterator->last(), 'Wrong element returned by last().');
     }
 
     /**
      * Checks if the "getAll" method basically works
-     *
-     * @test
      */
+    #[Test]
     public function getAllBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string.', TextIterator::WORD);
@@ -254,9 +243,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if the "isBoundary" method basically works with character iteration
-     *
-     * @test
      */
+    #[Test]
     public function isBoundaryInCharacterIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by character', TextIterator::CHARACTER);
@@ -269,9 +257,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if the "isBoundary" method basically works with word iteration
-     *
-     * @test
      */
+    #[Test]
     public function isBoundaryInWordIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word', TextIterator::WORD);
@@ -284,9 +271,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if the "isBoundary" method basically works with sentence iteration
-     *
-     * @test
      */
+    #[Test]
     public function isBoundaryInSentenceIterationBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by sentence', TextIterator::SENTENCE);
@@ -299,9 +285,8 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if the "isBoundary" method basically works with line iteration
-     *
-     * @test
      */
+    #[Test]
     public function isBoundaryInLineIterationBasicallyWorks()
     {
         $iterator = new TextIterator("This is a test string. \nLet\'s iterate \nit by line", TextIterator::LINE);
@@ -314,25 +299,23 @@ class TextIteratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Checks if the "following" method basically works with word iteration
-     *
-     * @test
      */
+    #[Test]
     public function followingBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word', TextIterator::WORD);
 
-        self::assertEquals($iterator->following(11), 14, 'Wrong offset for the following element returned.');
+        self::assertSame('14', $iterator->following(11), 'Wrong offset for the following element returned.');
     }
 
     /**
      * Checks if the "preceding" method basically works with word iteration
-     *
-     * @test
      */
+    #[Test]
     public function precedingBasicallyWorks()
     {
         $iterator = new TextIterator('This is a test string. Let\'s iterate it by word', TextIterator::WORD);
 
-        self::assertEquals($iterator->preceding(11), 10, 'Wrong offset for the preceding element returned.' . $iterator->preceding(11));
+        self::assertSame('10', $iterator->preceding(11), 'Wrong offset for the preceding element returned.' . $iterator->preceding(11));
     }
 }
